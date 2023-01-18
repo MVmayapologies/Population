@@ -12,7 +12,7 @@ import java.util.Scanner;
  *	@author	Maya Pullara
  *	@since	01.10.2023
  */
-public class Population {
+public class Population{
 	
 	// List of cities
 	private List<City> cities;
@@ -52,10 +52,10 @@ public class Population {
 				case 5: printList = popState(); break;
 				case 6: printList = popName(); break;
 			}
-			if(playChoice <= 6){
+			if(playChoice <= 6)
 				printTable( printList );
-				System.out.printf("%nElapsed Time %d milliseconds%n%n", elapsedTime);
-			}
+			if(playChoice <= 4)
+				System.out.printf("Elapsed Time %d milliseconds%n%n", elapsedTime);
 		}while(playChoice <9);
 		
 		System.out.println("\nThanks for using Population!\n");
@@ -85,7 +85,7 @@ public class Population {
 	
 	/** read the population file and fill  List<City> */
 	public void loadCities(){
-		cities = new ArrayList();
+		cities = new ArrayList<City>();
 		
 		Scanner readCities = FileUtils.openToRead(DATA_FILE);
 		readCities.useDelimiter("[\t\n]");
@@ -94,6 +94,8 @@ public class Population {
 			cities.add(new City(readCities.next(), readCities.next(), 
 				readCities.next(), Integer.parseInt(readCities.next())));
 		}
+		
+		System.out.println( cities.size() + " cities in database\n");
 	}
 
 	/**
@@ -108,6 +110,7 @@ public class Population {
 			System.out.printf("%4d:" + printList.get(count-1) + "\n", count);
 			count++;
 		}
+		System.out.println();
 	}
 
 	/**
@@ -176,8 +179,8 @@ public class Population {
 			mergeSortPop(start, (start + end)/2, largerList);
 			mergeSortPop((start + end)/2 + 1, end, largerList);
 
-			List<City> list1 = new ArrayList(largerList.subList(start, (start + end)/2+1));
-			List<City> list2 = new ArrayList(largerList.subList((start + end)/2 + 1, end+1));
+			List<City> list1 = new ArrayList<City>(largerList.subList(start, (start + end)/2+1));
+			List<City> list2 = new ArrayList<City>(largerList.subList((start + end)/2 + 1, end+1));
 			int point1, point2, ind;
 			point1 = point2 = 0;
 			ind = start;
@@ -258,8 +261,8 @@ public class Population {
 			mergeSortNames(start, (start + end)/2);
 			mergeSortNames((start + end)/2 + 1, end);
 
-			List<City> list1 = new ArrayList(cities.subList(start, (start + end)/2+1));
-			List<City> list2 = new ArrayList(cities.subList((start + end)/2 + 1, end+1));
+			List<City> list1 = new ArrayList<City>(cities.subList(start, (start + end)/2+1));
+			List<City> list2 = new ArrayList<City>(cities.subList((start + end)/2 + 1, end+1));
 			int point1, point2, ind;
 			point1 = point2 = 0;
 			ind = start;
@@ -301,9 +304,9 @@ public class Population {
 	 */
 	public List<City> popState(){
 		String stateName;
-		List<City> stateList = new ArrayList();
+		List<City> stateList = new ArrayList<City>();
 		do {
-			stateList = new ArrayList();
+			stateList = new ArrayList<City>();
 			stateName = Prompt.getString("Enter state name (ie. Alabama)");
 			for( City city: cities){
 				if( stateName.equals(city.getState())) {
@@ -328,9 +331,9 @@ public class Population {
 	 */
 	public List<City> popName(){
 		String cityName;
-		List<City> nameList = new ArrayList();
+		List<City> nameList = new ArrayList<City>();
 		do {
-			nameList = new ArrayList();
+			nameList = new ArrayList<City>();
 			cityName = Prompt.getString("Enter city name");
 			for( City city: cities){
 				if( cityName.equals(city.getName())) {
